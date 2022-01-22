@@ -8,7 +8,7 @@
 import Foundation
 
 // Compute the payment against loan principal plus interest.
-func pmt(rate: Double, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
+public func pmt(rate: Double, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
     
     let temp: Double = pow(1 + rate, Double(numPeriods))
     let fact: Double = (1 + rate * Double(whenDue)) * (temp - 1) / rate
@@ -16,7 +16,7 @@ func pmt(rate: Double, numPeriods: Int, presentValue: Double, futureValue: Doubl
 }
 
 // Compute the present value.
-func pv(rate: Double, numPeriods: Int, payment: Double, futureValue: Double, whenDue: Int = 0) -> Double {
+public func pv(rate: Double, numPeriods: Int, payment: Double, futureValue: Double, whenDue: Int = 0) -> Double {
     
     let temp: Double = pow(1 + rate, Double(numPeriods))
     let fact: Double = (1 + rate * Double(whenDue)) * (temp - 1) / rate
@@ -26,7 +26,7 @@ func pv(rate: Double, numPeriods: Int, payment: Double, futureValue: Double, whe
 
 
 // Compute the future value.
-func fv(rate: Double, numPeriods: Int, payment: Double, presentValue: Double, whenDue: Int = 0) -> Double {
+public func fv(rate: Double, numPeriods: Int, payment: Double, presentValue: Double, whenDue: Int = 0) -> Double {
     
     let temp: Double = pow(1 + rate, Double(numPeriods))
     let fact: Double = (1 + rate * Double(whenDue)) * (temp - 1) / rate
@@ -35,7 +35,7 @@ func fv(rate: Double, numPeriods: Int, payment: Double, presentValue: Double, wh
 }
 
 // Compute the interest portion of a payment.
-func ipmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
+public func ipmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
     
     let totalPayment: Double = pmt(rate: rate, numPeriods: numPeriods, presentValue: presentValue, futureValue: futureValue, whenDue: whenDue)
     
@@ -45,7 +45,7 @@ func ipmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futu
 }
 
 // Compute the payment against loan principal.
-func ppmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
+public func ppmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futureValue: Double = 0, whenDue: Int = 0) -> Double {
     
     let totalPayment: Double = pmt(rate: rate, numPeriods: numPeriods, presentValue: presentValue, futureValue: futureValue, whenDue: whenDue)
     
@@ -53,7 +53,7 @@ func ppmt(rate: Double, period: Int, numPeriods: Int, presentValue: Double, futu
 }
 
 // Compute the Internal Rate of Return of a series of cash flows.
-func irr(cashFlows: [Double], estimate: Double? = nil) -> Double {
+public func irr(cashFlows: [Double], estimate: Double? = nil) -> Double {
     var iteration: Int = 1
     let n: Int = cashFlows.count - 1
     let exponent: Double = 1.0 / (1.0 + 0.5 * (Double(n) - 1.0)) - 1.0
@@ -74,7 +74,7 @@ func irr(cashFlows: [Double], estimate: Double? = nil) -> Double {
 }
 
 // Compute the Net Present Value of a series of cash flows.
-func npv(rate: Double, cashFlows: [Double]) -> Double {
+public func npv(rate: Double, cashFlows: [Double]) -> Double {
     let periods = 0...cashFlows.count
     let discountFactors = periods.map {1 / pow(1 + rate, Double($0))}
     
